@@ -1,0 +1,15 @@
+tiatoolbox
+torch
+torchvision
+pytorch-lightning
+torchmetrics
+scikit-image
+scikit-learn
+scipy
+PyYAML
+tqdm
+opencv-python-headless
+matplotlib
+pytest
+strong-augment
+gradio[mcp]
