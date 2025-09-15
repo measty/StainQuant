@@ -1,0 +1,51 @@
+data_dir: E:\\HIMICO\\pix2pixHD\\himico\\train_D
+
+model:
+  K: 5               # number of stain channels
+  arch: unet         # use UNet for richer features
+  encoder:
+    base_channels: 32   # channels in first conv layer
+    depth: 2            # network depth / number of downsamplings
+    norm: instancenorm # normalisation layer type
+    residual: true      # use residual connections
+    dropout: 0.1        # dropout probability
+    cross_corr: true   # enable cross-stain attention module
+losses:
+  rec:  {weight: 1.0}                 # pixel-wise & vgg reconstruction error. default 1.0
+  l1:   {weight: [0.0,0.05]}                # sparsity on concentration maps. default 0.02
+  entropy: {weight: [0.0, 0.01]}            # per-pixel entropy penalty. default 0.05
+  tc:   {weight: 0.0}                # encourages channel independence. default 0.0
+  perm: {weight: 0.0}                 # channel-drop adversary loss. default 0.1
+  col:  {weight: [0.1, 0.05]}                # colour consistency with initial RGBs. default 0.005
+  orth: {weight: 0.0}                # keeps basis vectors distinct. default 0.05
+  balance: {weight: 0.0}              # promote usage of all channels. default 0.1
+  spike: {weight: [0.0, 0.0], channels: [0,1,2,3,4]}  # encourage sharp peaks in sparse channels
+  overlap: {weight: [0.0, 0.05]}              # discourage spatial overlap of top activations
+  mask: {weight: [0.0, 0.0], channel: [3,4], rgb: [[90, 200, 90],[85, 60, 10]], thresh: [0.05, 0.05]}
+channel_names:
+  - H
+  - CDX2
+  - MUC2
+  - MUC5
+  - CD8
+init_rgb:
+  - [110, 140, 200] # blue
+  - [190, 80, 120] # pink
+  - [240, 230, 80] # yellow
+  - [80, 220, 80] # green
+  - [85, 60, 10] # brown
+trainer:
+  max_epochs: 2
+  lr: 2e-4
+  weight_decay: 1e-5
+  batch_size: 2
+  update_every: 100
+  warmup_iters: 6000
+  ckpt_dir: checkpoints
+  strong_augment: false
+
+# Parameters for slide-level inference
+inference:
+  patch_size: 512
+  mpp: 0.5
+
