@@ -26,7 +26,7 @@ def main(config_path):
     print("Initializing trainer...")
     trainer = Trainer(cfg)
     print("Starting training...")
-    trainer.fit(loader, epochs=trainer_cfg.get('max_epochs', 1), ckpt_dir=ckpt_dir)
+    trainer.fit(loader, epochs=trainer_cfg.get('max_epochs', 1), ckpt_dir=ckpt_dir, vis_path=os.path.join(ckpt_dir, 'train_vis.html'))
     print("Training complete.")
 
 
