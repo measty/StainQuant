@@ -1,24 +1,23 @@
 # StainQuant: Physics-Guided Stain Separation for Multi-IHC Pathology Images
 
-StainLearn implements a physics-guided encoder–decoder for separating multiplex immunohistochemistry (IHC) stains from RGB whole-slide patches. The model operates in the optical-density domain, explicitly learning stain concentration maps and a stain basis that obey the Beer–Lambert law. By incorporating priors from digital pathology, the model produces disentangled stain channels suitable for downstream quantification and visualization.
+StainLearn implements a physics-guided encoder–decoder for separating multiplex immunohistochemistry (IHC) stains from RGB whole-slide patches. The model operates in the optical-density domain, explicitly learning stain concentration maps and a stain basis that obey the Beer–Lambert law. By incorporating priors from digital pathology domain knowledge via multiple loss terms, the model produces disentangled stain channels suitable for downstream quantification and visualization.
 
 ## Approach Overview
 
 - **CNN encoder for concentrations** – A UNet-style encoder produces non-negative stain concentration maps \(C(x) \ge 0\). Sparsity and entropy regularisers make the concentrations sharp and stain-specific.
 - **Learned stain dictionary** – A trainable basis \(\Lambda \in \mathbb{R}^{K\times3}\) represents per-stain absorbance.
-- **Visualization utilities** – Knockout (remove one stain) and single-channel renderings help interpret learned stains. A Gradio demo wraps these visualisations for rapid inspection of checkpoints.
+- **Visualization utilities** – Knockout (remove one stain) and single-channel renderings help interpret learned stains. A Gradio demo allows visualisations for rapid inspection of stain separation.
 
 ## Installation & Environment Setup
 
 1. **Clone the repository** and create a Python environment (3.10+ recommended):
    ```bash
-   git clone https://github.com/<your-org>/StainLearn.git
-   cd StainLearn
+   git clone https://github.com/measty/StainQuant.git
+   cd StainQuant
    ```
-2. **Install dependencies**:
+2. **Install package**:
    ```bash
-   pip install --upgrade pip
-   pip install -r requirements.txt
+   pip install -e .
    ```
 
 ## Data Preparation
