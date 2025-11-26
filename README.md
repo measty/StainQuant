@@ -2,6 +2,8 @@
 
 StainLearn implements a physics-guided encoder–decoder for separating multiplex immunohistochemistry (IHC) stains from RGB whole-slide patches. The model operates in the optical-density domain, explicitly learning stain concentration maps and a stain basis that obey the Beer–Lambert law. By incorporating priors from digital pathology domain knowledge via multiple loss terms, the model produces disentangled stain channels suitable for downstream quantification and visualization.
 
+Model weights for the mIHC panel described in the paper, and some example images are available here: https://drive.google.com/drive/folders/1qJ7B6SMDdioKrkIh3xsBneke8vR5XOG0?usp=sharing
+
 ## Approach Overview
 
 - **CNN encoder for concentrations** – A UNet-style encoder produces non-negative stain concentration maps \(C(x) \ge 0\). Sparsity and entropy regularisers make the concentrations sharp and stain-specific.
