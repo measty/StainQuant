@@ -115,7 +115,7 @@ During training the script writes periodic checkpoints to `trainer.ckpt_dir`, an
 Use the Gradio app to inspect a trained checkpoint interactively:
 
 ```bash
-python scripts/gradio_app.py --ckpt checkpoints/my_panel/final.pt
+python stainquant/cli/gradio_app.py --ckpt checkpoints/my_panel/final.pt
 ```
 
 The interface presents two galleries:
